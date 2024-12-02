@@ -12,10 +12,9 @@
 ---
 
 ## **Sobre o Projeto**  
-O *BookStore* é um projeto que foi criado para a discipçina de BackEnd e é voltado para o gerenciamento de uma livraria virtual, oferecendo uma API robusta e eficiente. 
-O foco aqui é a escalabilidade e organização, ele foi desenvolvido para atender às demandas modernas, mas ainda pode melhorar.  
+A Biblioteca é um projeto da materia de backend para o gerenciamento de usuarios e livros de uma biblioteca  
 
-Usando tecnologias como **Node.js**, **TypeScript** e **PostgreSQL**, o *BookStore* combina desempenho e confiabilidade, ideal para sistemas que exigem alta disponibilidade.  
+Usando tecnologias como **Node.js**, **TypeScript** e **PostgreSQL**
 
 ## **Funcionalidades**  
 - **Autenticação de Usuários**:  
@@ -28,7 +27,7 @@ Usando tecnologias como **Node.js**, **TypeScript** e **PostgreSQL**, o *BookSto
 - **Express.js**  
 - **TypeScript**  
 - **PostgreSQL**  
-- **Jest**   
+ 
 
 ## **Pré-requisitos**  
 Antes de começar, você precisará das seguintes ferramentas:  
