@@ -1,35 +1,23 @@
+import { Pool } from 'pg';
+import pool from '../config/database';
+import { Book } from '../models/bookModel';
+
 export class BookRepository {
   private pool: Pool = pool;
 
-  async getFilteredBooks(
-    offset: number,
-    limit: number,
-    author?: string,
-    minPrice?: number,
-    maxPrice?: number
-  ): Promise<Book[]> {
-    let query = 'SELECT * FROM books WHERE 1=1';
-    const params: any[] = [];
+  constructor() {
+    this.pool = pool;
+  }
 
-    if (author) {
-      params.push(author);
-      query += ` AND author = $${params.length}`;
-    }
 
-    if (minPrice !== undefined) {
-      params.push(minPrice);
-      query += ` AND price >= $${params.length}`;
-    }
-
-    if (maxPrice !== undefined) {
-      params.push(maxPrice);
-      query += ` AND price <= $${params.length}`;
-    }
-
-    params.push(limit, offset);
-    query += ` LIMIT $${params.length - 1} OFFSET $${params.length}`;
-
-    const { rows } = await this.pool.query(query, params);
+  async getAllBooks(): Promise<Book[]> {
+    const { rows } = await this.pool.query('SELECT * FROM books');
     return rows;
+  }
+
+  async addBook(title: string, author: string, price: number): Promise<Book> {
+    const query = 'INSERT INTO books (title, author, price) VALUES ($1, $2, $3) RETURNING *';
+    const { rows } = await this.pool.query(query, [title, author, price]);
+    return rows[0];
   }
 }

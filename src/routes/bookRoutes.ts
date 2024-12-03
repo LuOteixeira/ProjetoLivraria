@@ -1,9 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
 import { getAllBooks, addBook } from '../controllers/bookController';
-import { authenticate } from '../middlewares/authMiddleware';
 
-const router = express.Router();
+const router = Router();
 
-router.get('/', getAllBooks); 
-router.post('/', authenticate, addBook); 
+router.get('/books', getAllBooks);
+router.post('/books', addBook);
+
 export default router;

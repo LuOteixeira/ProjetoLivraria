@@ -8,7 +8,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
       const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password }),z
       });
 
       if (response.ok) {

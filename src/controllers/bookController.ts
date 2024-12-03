@@ -1,23 +1,24 @@
 import { Request, Response } from 'express';
-import { BookRepository } from '../repositories/bookRepository';
+import { BookService } from '../services/bookService';
 
-const bookRepository = new BookRepository();
+const bookService = new BookService();
 
 export const getAllBooks = async (req: Request, res: Response) => {
-  const { page = 1, limit = 10, author, minPrice, maxPrice } = req.query;
-
-  const offset = (Number(page) - 1) * Number(limit);
-
   try {
-    const books = await bookRepository.getFilteredBooks(
-      offset,
-      Number(limit),
-      author as string | undefined,
-      Number(minPrice) || undefined,
-      Number(maxPrice) || undefined
-    );
+    const books = await bookService.listBooks();
     res.status(200).json(books);
   } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar Livros' });
+  }
+};
+
+export const addBook = async (req: Request, res: Response) => {
+  const { title, author, price } = req.body;
+  try {
+    const book = await bookService.createBook(title, author, price);
+    res.status(201).json(book);
+  } catch (err: any) {
     res.status(400).json({ error: err.message });
   }
 };
